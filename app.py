@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib # Untuk memuat model yang disimpan
 
-# --- Konfigurasi Halaman Streamlit ---
+--- Konfigurasi Halaman Streamlit ---
 st.set_page_config(
     page_title="Prediksi Kepribadian",
     page_icon="👤",
