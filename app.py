@@ -49,7 +49,6 @@ friends_circle_size = st.number_input(
 st.markdown("---")
 if st.button("Prediksi Kepribadian"):
     if knn_model is not None:
-        # Buat DataFrame dari input pengguna
         new_data = pd.DataFrame(
             [[social_event_attendance, going_outside, friends_circle_size]],
             columns=['Social_event_attendance', 'Going_outside', 'Friends_circle_size']
