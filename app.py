@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import joblib # Untuk memuat model yang disimpan
 
---- Konfigurasi Halaman Streamlit ---
 st.set_page_config(
     page_title="Prediksi Kepribadian",
     page_icon="👤",
@@ -10,7 +9,6 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-# --- Memuat Model (Menggunakan st.cache_resource agar model hanya dimuat sekali) ---
 @st.cache_resource
 def load_personality_model():
     """
@@ -24,18 +22,14 @@ def load_personality_model():
         st.error("Error: File model 'personality_model.pkl' tidak ditemukan. Pastikan Anda telah mengunggahnya.")
         return None
 
-# Muat model saat aplikasi dimulai
 knn_model = load_personality_model()
 
-# --- Judul dan Deskripsi Aplikasi ---
 st.title("Aplikasi Prediksi Kepribadian")
 st.write("Aplikasi ini memprediksi apakah seseorang cenderung Introvert atau Ekstrovert berdasarkan beberapa aktivitas sosial.")
 st.markdown("---")
 
-# --- Input Pengguna ---
 st.header("Masukkan Data Aktivitas:")
 
-# Menggunakan st.number_input untuk input numerik
 social_event_attendance = st.number_input(
     "Jumlah Kehadiran Acara Sosial per bulan:",
     min_value=0, max_value=30, value=5, step=1,
@@ -52,7 +46,6 @@ friends_circle_size = st.number_input(
     help="Jumlah orang yang Anda anggap teman dekat."
 )
 
-# --- Tombol Prediksi ---
 st.markdown("---")
 if st.button("Prediksi Kepribadian"):
     if knn_model is not None:
@@ -63,10 +56,8 @@ if st.button("Prediksi Kepribadian"):
         )
 
         try:
-            # Lakukan prediksi
             predicted_code = knn_model.predict(new_data)[0] # Hasilnya 0 atau 1
 
-            # Konversi hasil prediksi ke label yang mudah dibaca
             label_mapping = {1: 'Ekstrovert', 0: 'Introvert'}
             predicted_label = label_mapping.get(predicted_code, 'Tidak diketahui')
 
